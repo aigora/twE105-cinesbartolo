@@ -1,6 +1,5 @@
-# Título del trabajo
+# Cines Bartolo
 
-- Cines Bartolo
 - En este trabajo se simulará una página web de un cine a través del cual podras elegir tu entrada y asiento.
 
 ## Integrantes del equipo
