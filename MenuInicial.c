@@ -63,13 +63,11 @@ while(1){
 			case 's':
 			case 'S':
 				printf("Don bartolo os desea un buen d\241a\n");
-				system("pause");
 				return;
 			case 'n':
 			case 'N':	
 				break;
 			}
-			getchar();
 			break;
 			
 		default:
@@ -79,4 +77,17 @@ while(1){
 	getchar();
 	system("cls");
 }
+}
+
+int Pediropcion() {
+	int opc;
+	printf("Introduce opci\242n\n");
+	scanf_s("%d", &opc);
+	return opc;
+}
+char Pedirchar() {
+	char opc;
+	printf("Introduce opci\242n\n");
+	scanf_s("%c", &opc);
+	return opc;
 }
