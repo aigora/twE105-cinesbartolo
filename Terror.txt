@@ -1,0 +1,6 @@
+Peliculas			Horario		Sala
+1-IT				22:00		7
+2-El suspenso			22:00		10
+3-Insidious			23:45		7				
+4-La aparicion de Mr.Charles	23:45		9		
+5-El resplandor			23:45		10

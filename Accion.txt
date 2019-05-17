@@ -1,0 +1,8 @@
+Pelicula			Horario		Sala
+1-Los Vengadores		18:00		5
+2-Star Wars			19:15		6
+3-Batman Begins			21:00		5
+4-Indiana Jones			17:30		6
+5-X-Men				22:00		7
+6-La Aparicion de Hambrona	16:00		5
+7-Gladiator			16:00		6

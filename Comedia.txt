@@ -1,0 +1,6 @@
+Pelicula		Horario		Sala
+1-Ted			16:00		 1
+2-Deadpool		18:00		 1
+3-Supersalidos		18:30		 2
+4-El dictador		17:00		 3
+5-Primos		17:30		 4

@@ -1,0 +1,6 @@
+Peliculas				Horario		Sala
+1-El diario de Noah			21:00		8
+2-Titanic				23:00		9		
+3-Casablanca				23:00		8		
+4-Dirty Dancing				19:30		9
+5-Una tarde de "Quimica"		21:30		9 

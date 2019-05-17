@@ -1,0 +1,7 @@
+Peliculas			Horario		Sala
+1-El viaje de Bartolito		17:00		7
+2-Up				17:30		9				
+3-Toy story			17:00		8
+4-Shrek				18:30		8
+5-WALL.E			17:30		10
+6-Frozen			18:30		7
