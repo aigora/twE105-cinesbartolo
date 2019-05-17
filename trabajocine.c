@@ -1,9 +1,10 @@
-//Antes de empezar se debe resetear (meterse en empleados usuario:Bartolo y contraseña:9876 y dar a resetear)
+//Antes de empezar se debe resetear (meterse en empleados usuario:Bartolo y contraseÃ±a:9876 y dar a resetear)
 
 #include <stdio.h>
 #include <stdlib.h>
 #include<string.h>
-#define TMATRIZ 9//tamaño matriz de los asientos del cine
+#include <time.h>
+#define TMATRIZ 9//tamaÃ±o matriz de los asientos del cine
 #define NUMUSUARIOS 25
 
 int asientoslibres(char fichero[]);
@@ -13,11 +14,13 @@ int pedirnumero();
 int Pediropcion();
 char Pedirchar();
 void comprarentrada(char fichero[]);
-char pedirTarjeta();//pide un numero de tarjeta de 16 digitos
-char pedirpin();//pide un pin de 4 digitos
+void pedirTarjeta();//pide un numero de tarjeta de 16 digitos
+void pedirpin();//pide un pin de 4 digitos
 void leyenda(int i);//Leyenda de la sala
 void resetpantalla(char fichero[]);//resetea las salas
 void resetusuarios();//resetea los usuarios
+void tiempo();
+void disponible(int horario);
 
 struct TUsuario {
 	char nombre[50];
@@ -45,10 +48,6 @@ void main() {
 	errno_t error;
 	struct TUsuario usu[NUMUSUARIOS];
 	struct TAux aux;
-	//reloj
-	time_t tiempo;
-	char cad[80];
-	struct tm * ptiempo;
 
 	while (1) {
 		fopen_s(&Usuarios, "usuarios.txt", "r");
@@ -69,14 +68,6 @@ void main() {
 		fopen_s(&Infantil, "Infantil.txt", "r");
 
 		printf("	BIENVENIDO A CINES BARTOLO S.L.	 \n\n");
-		
-		//reloj
-		time( &tiempo );
-		
-		ptiempo = localtime( &tiempo );
-		strftime(cad,80,"%x  -  %I:%M %p", ptiempo);
-		printf("\n Fecha y Hora :   %s  \n\n", cad );
-		
 		printf(" 1 - Cartelera\n");
 		printf(" 2 - Registrarse\n");
 		printf(" 3 - Atenci\242n al cliente\n");
@@ -96,157 +87,190 @@ void main() {
 			switch (Pediropcion()) {
 			case 1:
 				system("cls");
+				tiempo();
 				while ((cartelera = fgetc(Comedia)) != EOF) {//Imprimimos el fichero entero
 					printf("%c", cartelera);
 				}
 				printf("\n");
 				switch (Pediropcion()) {
 				case 1:
-					printf("Has elegido Ted\n");
+					printf("Has elegido Ted   ");
+					disponible(16);
 					comprarentrada("PantallaTed.txt");
 					break;
 				case 2:
-					printf("Has elegido Deadpool\n");
+					printf("Has elegido Deadpool   ");
+					disponible(18);
 					comprarentrada("PantallaDeadpool.txt");
 					break;
 				case 3:
-					printf("Has elegido Supersalidos\n");
+					printf("Has elegido Supersalidos   ");
+					disponible(18);
 					comprarentrada("PantallaSupersalidos.txt");
 					break;
 				case 4:
 					printf("Has elegido El Dictador\n");
+					disponible(19);
 					comprarentrada("PantallaDictador.txt");
 					break;
 				case 5:
-					printf("Has elegido Primos\n");
+					printf("Has elegido Primos   ");
+					disponible(19);
 					comprarentrada("PantallaPrimos.txt");
 					break;
 				}
 				break;
 			case 2:
 				system("cls");
+				tiempo();
 				while ((cartelera = fgetc(Accion)) != EOF) {
 					printf("%c", cartelera);
 				}
 				printf("\n");
 				switch (Pediropcion()) {
 				case 1:
-					printf("Has elegido Los Vengadores\n");
+					printf("Has elegido Los Vengadores   ");
+					disponible(18);
 					comprarentrada("PantallaVengadores.txt");
 					break;
 				case 2:
-					printf("Has elegido Star Wars\n");
+					printf("Has elegido Star Wars   ");
+					disponible(19);
 					comprarentrada("PantallaStarWars.txt");
 					break;
 				case 3:
-					printf("Has elegido Batman Begins\n");
+					printf("Has elegido Batman Begins   ");
+					disponible(20);
 					comprarentrada("PantallaBatman.txt");
 					break;
 				case 4:
-					printf("Has elegido Indiana Jones\n");
+					printf("Has elegido Indiana Jones   ");
+					disponible(20);
 					comprarentrada("PantallaIndianaJones.txt");
 					break;
 				case 5:
-					printf("Has elegido X-Men\n");
+					printf("Has elegido X-Men   ");
+					disponible(22);
 					comprarentrada("PantallaXmen.txt");
 					break;
 				case 6:
-					printf("Has elegido La Aparici\242n de Hambrona\n");
+					printf("Has elegido La Aparici\242n de Hambrona   ");
+					disponible(23);
 					comprarentrada("PantallaHambrona.txt");
 					break;
 				case 7:
-					printf("Has elegido Gladiator\n");
+					printf("Has elegido Gladiator   ");
+					disponible(23);
 					comprarentrada("PantallaGladiator.txt");
 					break;
 				}
 				break;
 			case 3:
 				system("cls");
+				tiempo();
 				while ((cartelera = fgetc(Terror)) != EOF) {
 					printf("%c", cartelera);
 				}
 				printf("\n");
 				switch (Pediropcion()) {
 				case 1:
-					printf("Has elegido IT\n");
+					printf("Has elegido IT   ");
+					disponible(12);
 					comprarentrada("PantallaIt.txt");
 					break;
 				case 2:
-					printf("Has elegido El Suspenso\n");
+					printf("Has elegido El Suspenso   ");
+					disponible(15);
 					comprarentrada("PantallaSuspenso.txt");
 					break;
 				case 3:
-					printf("Has elegido Insidious\n");
+					printf("Has elegido Insidious   ");
+					disponible(19);
 					comprarentrada("PantallaInsidious.txt");
 					break;
 				case 4:
-					printf("Has elegido La aparici\242n de Mr.Charles\n");
+					printf("Has elegido La aparici\242n de Mr.Charles   ");
+					disponible(20);
 					comprarentrada("PantallaMrCharles.txt");
 					break;
 				case 5:
-					printf("Has elegido El resplandor\n");
+					printf("Has elegido El resplandor   ");
+					disponible(23);
 					comprarentrada("PantallaResplandor.txt");
 					break;
 				}
 				break;
 			case 4:
 				system("cls");
+				tiempo();
 				while ((cartelera = fgetc(Romance)) != EOF) {
 					printf("%c", cartelera);
 				}
 				printf("\n");
 				switch (Pediropcion()) {
 				case 1:
-					printf("Has elegido El diario de Noah\n");
+					printf("Has elegido El diario de Noah   ");
+					disponible(10);
 					comprarentrada("PantallaNoah.txt");
 					break;
 				case 2:
-					printf("Has elegido Titanic\n");
+					printf("Has elegido Titanic   ");
+					disponible(12);
 					comprarentrada("PantallaTitanic.txt");
 					break;
 				case 3:
-					printf("Has elegido Casablanca\n");
+					printf("Has elegido Casablanca   ");
+					disponible(22);
 					comprarentrada("PantallaCasablanca.txt");
 					break;
 				case 4:
-					printf("Has elegido Dirty Dancing\n");
+					printf("Has elegido Dirty Dancing   ");
+					disponible(22);
 					comprarentrada("PantallaDirtyDancing.txt");
 					break;
 				case 5:
-					printf("Has elegido Una tarde de \"Qu\241mica\",\n");
+					printf("Has elegido Una tarde de \"Qu\241mica\",   ");
+					disponible(23);
 					comprarentrada("PantallaQuimica.txt");
 					break;
 				}
 				break;
 			case 5:
 				system("cls");
+				tiempo();
 				while ((cartelera = fgetc(Infantil)) != EOF) {
 					printf("%c", cartelera);
 				}
 				printf("\n");
 				switch (Pediropcion()) {
 				case 1:
-					printf("Has elegido El viaje de Bartolito\n");
+					printf("Has elegido El viaje de Bartolito   ");
+					disponible(12);
 					comprarentrada("PantallaBartolo.txt");
 					break;
 				case 2:
-					printf("Has elegido Up\n");
+					printf("Has elegido Up   ");
+					disponible(15);
 					comprarentrada("PantallaUp.txt");
 					break;
 				case 3:
-					printf("Has elegido Toy story\n");
+					printf("Has elegido Toy story    ");
+					disponible(17);
 					comprarentrada("PantallaToy.txt");
 					break;
 				case 4:
-					printf("Has elegido Shrek\n");
+					printf("Has elegido Shrek   ");
+					disponible(18);
 					comprarentrada("PantallaShrek.txt");
 					break;
 				case 5:
-					printf("Has elegido WALL.E\n");
+					printf("Has elegido WALL.E   ");
+					disponible(19);
 					comprarentrada("PantallaWALLe.txt");
 					break;
 				case 6:
-					printf("Has elegido Frozen\n");
+					printf("Has elegido Frozen");
+					disponible(20);
 					comprarentrada("PantallaFrozen.txt");
 					break;
 				}
@@ -273,7 +297,7 @@ void main() {
 					}
 					else {
 						strcpy_s(usu[nusu].nombre, 50, aux.nombre); //guarda el nombre nuevo en usuarios
-						printf("Introduzca su contrasena\n");
+						printf("Introduzca su contrase\244a\n");
 						scanf_s("%s", &usu[nusu].contrasena, 50);
 						printf("Introduzca su numero de tarjeta\n");
 						scanf_s("%s", &usu[nusu].ntarjeta, 25);
@@ -533,7 +557,7 @@ void leyenda(int i) {
 		printf("\t\t\300\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\304\331");
 	}
 	printf("\n\n");
-	return;
+	//return;
 }
 
 int Pediropcion() {
@@ -578,7 +602,7 @@ void comprarentrada(char nFichero[]) {
 	precio = precio * nentradas;//calcula el precio
 	cont = nentradas;
 	printf("Tienes que pagar: %.2f $\n", precio);
-	for (n = 0; n < cont; n++) {//se repite hasta que hayas elegido el mismo nº de asientos que entradas
+	for (n = 0; n < cont; n++) {//se repite hasta que hayas elegido el mismo nÂº de asientos que entradas
 		for (i = 0; i < TMATRIZ; i++) {//lee el fichero
 			for (j = 0; j < TMATRIZ - 1; j++) {
 				fscanf_s(Pantalla, "%d    ", &sala[i][j]);
@@ -586,7 +610,7 @@ void comprarentrada(char nFichero[]) {
 			fscanf_s(Pantalla, "%d\n\n", &sala[i][j]);
 		}
 		fclose(Pantalla);
-		nasientos = asientoslibres(nFichero);//nº de asientos disponibles 
+		nasientos = asientoslibres(nFichero);//nÂº de asientos disponibles 
 		if (n == 0) {//n=0 para que solo entre la primera vez
 			if (nasientos < nentradas) {//si no hay asientos suficientes
 				system("cls");
@@ -706,7 +730,7 @@ void comprarentrada(char nFichero[]) {
 				printf("Introduzca su contrase\244a para pagar\n");
 				scanf_s("%s", &aux.contrasena, 50);
 				getchar();
-				comp1 = strcmp(aux.contrasena, usu[k].contrasena); //Compara  si es la contraseña
+				comp1 = strcmp(aux.contrasena, usu[k].contrasena); //Compara  si es la contraseÃ±a
 				if (comp1 == 0) {
 					usu[k].nentradas = nentradas + usu[k].nentradas;//suma a las entradas ya existentes la nueva compra
 					printf("Pago correcto\n");
@@ -720,7 +744,7 @@ void comprarentrada(char nFichero[]) {
 				else {
 					printf("contrase\244a incorrecta, vuelva a intentarlo\n");
 				}
-			} while (comp1 != 0); //Hasta que la contraseña sea correcta se repite
+			} while (comp1 != 0); //Hasta que la contraseÃ±a sea correcta se repite
 		}
 		else {
 			printf("Lo sentimos, no se encuentra entre nuestros usuarios, reg\241strese como uno nuevo.\n");
@@ -751,7 +775,7 @@ void comprarentrada(char nFichero[]) {
 	return;
 }
 
-char pedirTarjeta() {
+void pedirTarjeta() {
 	getchar();
 	char ntarjeta[50];
 	do {
@@ -762,10 +786,10 @@ char pedirTarjeta() {
 		}
 	} while (strlen(ntarjeta) != 16);//si la longitud es diferente a 16 vuelve a repetir
 	ntarjeta[17] = '\0';
-	return ntarjeta;
+
 }
 
-char pedirpin() {
+void pedirpin() {
 	char npin[10];
 	do {
 		printf("Introduce n\243mero secreto\n");
@@ -775,7 +799,7 @@ char pedirpin() {
 		}
 	} while (strlen(npin) != 4);//si la longitud es diferente a 4 vuelve a repetir
 	npin[5] = '\0';
-	return npin;
+
 }
 
 void resetpantalla(char fichero[]) {
@@ -799,4 +823,35 @@ void resetusuarios() {
 	fprintf(Usuarios, "0");
 	fclose(Usuarios);
 	return;
+}
+
+void tiempo(){
+	time_t tiempo;
+	char cad[80];
+	struct tm * pTiempo;
+
+tiempo = time( NULL );
+		pTiempo = localtime( &tiempo );
+		strftime( cad, 80, "%x, %H:%M", pTiempo );
+		printf( "\n Fecha y Hora: %s\n\n\n", cad );
+}
+
+void disponible(int horario){
+	char cad[80];
+	int hora;
+
+	time_t tiempo;
+   struct tm *ptiempo;
+
+   time( &tiempo );
+   ptiempo = localtime( &tiempo );
+   strftime(cad,80,"%H", ptiempo);
+   
+  hora = cad[0]*10+cad[1] - (541-13);
+   
+  if(hora>horario){
+ printf("Se ha pasado la hora de la sesi\242n. La entrada ser\240 para la sesi\242n de ma\244ana.\n");}
+  else {
+ printf("La entrada es para la sesi\242n de hoy.\n");
+ 	}
 }
